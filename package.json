@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx src/index.ts"
+    "dev": "tsx src/index.ts",
+    "callBack": "tsx src/callbackVersion.ts",
+    "promise": "tsx src/promiseVersion.ts",
+    "asyncAwait": "tsx src/asyncAwaitVersion.ts"
+
   },
   "keywords": [],
   "author": "",

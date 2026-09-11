@@ -1,7 +1,7 @@
 function fetchUserId(callback: (error: Error | null, userId?: string) => void) {
     console.log("Fetching user ID...");
     setTimeout(() => {
-        const userId = "user";
+        const userId = "08585485488";
         callback(null, userId);
     }, 2000);
 }
@@ -11,13 +11,14 @@ function fetchUserId(callback: (error: Error | null, userId?: string) => void) {
 function fetchUserData(userId: string, callback: (error: Error | null, userData?: { name: string; email: string }) => void) {
     console.log(`Fetching data for user ID: ${userId}`);
     setTimeout(() => {
-        const userData = { name: "John Doe", email: "Shape@njbh.com" };
-        callback(null, userData);
+        const userData = { name: "Neliswa Ngcobo Software Developer ", email: "newcompanyname@gmail.com" };
+        callback(null,userData);
     }, 3000);
 }
 
 function savedUserLog(userName: string, userEmail: string, callback: (error: Error | null, logStatus?: string) => void) {
-    console.log(`Saving log for $(userName") with $(userEmail)`);
+    console.log(`Saving log for ${userName} with ${userEmail}`);
+    
     setTimeout(() => {
         const status = "succesfully"
         callback(null, status)
