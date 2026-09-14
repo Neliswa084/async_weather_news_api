@@ -9,17 +9,16 @@
     "callBack": "tsx src/callbackVersion.ts",
     "promise": "tsx src/promiseVersion.ts",
     "asyncAwait": "tsx src/asyncAwaitVersion.ts"
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@types/node": "^22.20.2",
     "typescript": "^7.0.2"
   },
   "devDependencies": {
+    "@types/node": "^26.5.1",
     "nodemon": "^3.1.14",
     "tsx": "^4.23.13"
   }
