@@ -1,4 +1,6 @@
 import https from 'https'
+import type {WeatherData , NewsData} from './types'
+
 
 // ============================================================
 // PROMISE VERSION
@@ -8,27 +10,10 @@ import https from 'https'
 // .catch() handles errors for the whole chain.
 // ============================================================
 
-// --- STEP 1: Same data types ---
 
-type WeatherData = {
-  current_weather: {
-    temperature: number
-    windspeed: number
-    weathercode: number
-  }
-}
 
-type NewsPost = {
-  id: number
-  title: string
-  body: string
-}
 
-type NewsData = {
-  posts: NewsPost[]
-}
-
-// --- STEP 2: A helper that returns a Promise instead of using a callback ---
+// A helper that returns a Promise instead of using a callback 
 // The Promise either resolves (success) or rejects (failure).
 
 function fetchData(url: string): Promise<string> {
@@ -56,7 +41,7 @@ function fetchData(url: string): Promise<string> {
   })
 }
 
-// --- STEP 3: Fetch weather — returns a Promise ---
+// Fetch weather — returns a Promise 
 
 function fetchWeather(): Promise<WeatherData> {
   const url = 'https://api.open-meteo.com/v1/forecast?latitude=-29.86&longitude=31.02&current_weather=true'
@@ -66,7 +51,7 @@ function fetchWeather(): Promise<WeatherData> {
   })
 }
 
-// --- STEP 4: Fetch news — returns a Promise ---
+// Fetch news — returns a Promise 
 
 function fetchNews(): Promise<NewsData> {
   const url = 'https://dummyjson.com/posts?limit=5'
@@ -76,7 +61,6 @@ function fetchNews(): Promise<NewsData> {
   })
 }
 
-// --- STEP 5: Display functions (same as before) ---
 
 function displayWeather(weather: WeatherData): void {
   const w = weather.current_weather
@@ -95,7 +79,7 @@ function displayNews(news: NewsData): void {
 
 // ============================================================
 // PART A: Chained Promises — one after the other
-// Notice: no nesting. Each .then() flows into the next.
+//Here the is no nesting .  Each .then() flows into the next 
 // ============================================================
 
 console.log('=== PROMISE VERSION ===')

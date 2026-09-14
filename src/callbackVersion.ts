@@ -1,34 +1,18 @@
 import https from 'https'
+import type {WeatherData , NewsData} from './types'
 
-// ============================================================
+
+
 // CALLBACK VERSION
 // A callback is a function you pass into another function.
 // The outer function calls it when it's done.
 // Each step must finish before the next one starts.
-// This creates "callback hell" — nested functions inside functions.
-// ============================================================
+// This creates "callback hell" nested functions inside functions.
 
-// --- STEP 1: Define the shape of our data ---
 
-type WeatherData = {
-  current_weather: {
-    temperature: number
-    windspeed: number
-    weathercode: number
-  }
-}
 
-type NewsPost = {
-  id: number
-  title: string
-  body: string
-}
 
-type NewsData = {
-  posts: NewsPost[]
-}
-
-// --- STEP 2: A helper function that makes an HTTPS GET request ---
+// A helper function that makes an HTTPS GET request 
 // It takes a URL and a callback.
 // When the request is done, it calls the callback with the data.
 // If something goes wrong, it calls the callback with an error.
@@ -39,7 +23,7 @@ function fetchData(url: string, callback: (error: Error | null, data?: string) =
   https.get(url, (response) => {
     let rawData = ''
 
-    // Data comes in chunks — collect them
+    // Data comes in chunks  i collect them
     response.on('data', (chunk) => {
       rawData += chunk
     })
@@ -59,7 +43,7 @@ function fetchData(url: string, callback: (error: Error | null, data?: string) =
   })
 }
 
-// --- STEP 3: Fetch weather using a callback ---
+// Fetch weather using a callback 
 
 function fetchWeather(callback: (error: Error | null, weather?: WeatherData) => void): void {
   // Durban coordinates: latitude -29.86, longitude 31.02
@@ -76,7 +60,7 @@ function fetchWeather(callback: (error: Error | null, weather?: WeatherData) => 
   })
 }
 
-// --- STEP 4: Fetch news using a callback ---
+// Fetch news using a callback 
 
 function fetchNews(callback: (error: Error | null, news?: NewsData) => void): void {
   const url = 'https://dummyjson.com/posts?limit=5'
@@ -92,17 +76,17 @@ function fetchNews(callback: (error: Error | null, news?: NewsData) => void): vo
   })
 }
 
-// --- STEP 5: Display weather results ---
+//  Display weather results 
 
 function displayWeather(weather: WeatherData): void {
   const w = weather.current_weather
-  console.log('\n--- WEATHER (Durban) ---')
+  console.log('\n--- WEATHER  ---')
   console.log(`Temperature : ${w.temperature}°C`)
   console.log(`Wind Speed  : ${w.windspeed} km/h`)
   console.log(`Weather Code: ${w.weathercode}`)
 }
 
-// --- STEP 6: Display news results ---
+//  Display news results 
 
 function displayNews(news: NewsData): void {
   console.log('\n--- LATEST NEWS HEADLINES ---')
@@ -111,8 +95,8 @@ function displayNews(news: NewsData): void {
   })
 }
 
-// --- STEP 7: Run everything with callbacks (callback hell) ---
-// Notice how each step is nested inside the previous one.
+//  Run everything with callbacks (callback hell) 
+// each step is nested inside the previous one.
 // This is callback hell — the code keeps moving to the right.
 
 console.log('=== CALLBACK VERSION ===')
@@ -124,7 +108,7 @@ fetchWeather((weatherError, weather) => {
     return
   }
 
-  // Weather is done — now fetch news inside this callback
+  // Weather is done  now it will  fetch news inside this callback
   displayWeather(weather!)
 
   fetchNews((newsError, news) => {
