@@ -2,13 +2,13 @@ import https from 'https'
 import type {WeatherData , NewsData} from './types'
 
 
-// ============================================================
+
 // PROMISE VERSION
 // A Promise represents a value that will be available in the future.
 // Instead of nesting callbacks, you chain .then() calls.
 // This keeps the code flat and easier to read.
 // .catch() handles errors for the whole chain.
-// ============================================================
+
 
 
 
@@ -77,10 +77,10 @@ function displayNews(news: NewsData): void {
   })
 }
 
-// ============================================================
+
 // PART A: Chained Promises — one after the other
 //Here the is no nesting .  Each .then() flows into the next 
-// ============================================================
+
 
 console.log('=== PROMISE VERSION ===')
 console.log('\n-- Part A: Chained (weather first, then news) --\n')
@@ -99,12 +99,12 @@ fetchWeather()
   })
   .then(() => {
 
-    // ============================================================
+    
     // PART B: Promise.all() — run BOTH at the same time
     // Weather and news are fetched simultaneously.
     // We wait for BOTH to finish before displaying anything.
     // Faster than doing them one after the other.
-    // ============================================================
+    
 
     console.log('\n-- Part B: Promise.all() — both at the same time --\n')
 
@@ -120,11 +120,11 @@ fetchWeather()
   })
   .then(() => {
 
-    // ============================================================
+    
     // PART C: Promise.race() — get the FASTEST response
     // Whichever request finishes first wins.
     // The result is only from the winner — the other is ignored.
-    // ============================================================
+    
 
     console.log('\n-- Part C: Promise.race() — fastest response wins --\n')
 
