@@ -1,35 +1,17 @@
 import https from 'https'
+import type {WeatherData , NewsData} from './types'
 
-// ============================================================
 // ASYNC/AWAIT VERSION
 // async/await is built on top of Promises — it's just cleaner syntax.
 // Instead of chaining .then(), you write code that LOOKS synchronous
 // but is still asynchronous under the hood.
 // "await" pauses the function until the Promise resolves.
 // Errors are caught with try...catch instead of .catch()
-// ============================================================
 
-// --- STEP 1: Same data types ---
 
-type WeatherData = {
-  current_weather: {
-    temperature: number
-    windspeed: number
-    weathercode: number
-  }
-}
 
-type NewsPost = {
-  id: number
-  title: string
-  body: string
-}
 
-type NewsData = {
-  posts: NewsPost[]
-}
-
-// --- STEP 2: Same helper — returns a Promise (await needs a Promise) ---
+//   Helper — returns a Promise (await needs a Promise) 
 
 function fetchData(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -56,7 +38,7 @@ function fetchData(url: string): Promise<string> {
   })
 }
 
-// --- STEP 3: Fetch weather — async function ---
+//  Fetch weather — async function 
 // "async" means this function always returns a Promise
 // "await" waits for fetchData to finish before moving to the next line
 
@@ -66,7 +48,7 @@ async function fetchWeather(): Promise<WeatherData> {
   return JSON.parse(data) as WeatherData
 }
 
-// --- STEP 4: Fetch news — async function ---
+//  Fetch news — async function 
 
 async function fetchNews(): Promise<NewsData> {
   const url = 'https://dummyjson.com/posts?limit=5'
@@ -74,7 +56,7 @@ async function fetchNews(): Promise<NewsData> {
   return JSON.parse(data) as NewsData
 }
 
-// --- STEP 5: Display functions ---
+//  Display functions 
 
 function displayWeather(weather: WeatherData): void {
   const w = weather.current_weather
@@ -91,16 +73,16 @@ function displayNews(news: NewsData): void {
   })
 }
 
-// --- STEP 6: Main function — runs everything ---
+//  Main function — runs everything 
 // async/await must live inside an async function
 
 async function main() {
   console.log('=== ASYNC/AWAIT VERSION ===')
 
-  // ============================================================
+  
   // PART A: One after the other — weather first, then news
   // Clean and readable — looks like normal synchronous code
-  // ============================================================
+  
 
   console.log('\n-- Part A: One after the other --\n')
 
@@ -116,11 +98,11 @@ async function main() {
     console.error('Error:', (error as Error).message)
   }
 
-  // ============================================================
+  
   // PART B: Promise.all() with async/await
-  // Both requests fire at the same time — faster than Part A
+  // Both requests fire at the same time faster than Part A
   // We await both together
-  // ============================================================
+  
 
   console.log('\n-- Part B: Promise.all() — both at the same time --\n')
 
@@ -134,10 +116,10 @@ async function main() {
     console.error('Promise.all() error:', (error as Error).message)
   }
 
-  // ============================================================
+  
   // PART C: Promise.race() with async/await
-  // Both requests fire — only the fastest result is used
-  // ============================================================
+  // Both requests fire only the fastest result is used
+  
 
   console.log('\n-- Part C: Promise.race() — fastest response wins --\n')
 
@@ -153,5 +135,5 @@ async function main() {
   console.log('\nAll done! (Async/Await version)')
 }
 
-// --- STEP 7: Call the main function ---
+//  Call the main function
 main()
